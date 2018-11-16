@@ -1,28 +1,53 @@
 #nathan broadbent
 #11/18
+import random
 #questions
-upperQ="this function turns all letters in a string into capital letters"
-titleQ="this function capitalizes the first letter of every word"
-flowChartQ="used to show how a program flows"
-intQ="a whole number data type"
-stringQ="a list of characters surrounded by quotations"
-indexQ="a specific position in a string"
-functionQ=" a block of code that you can call whenever"
-variableQ="a defined value that can be called"
-commentQ="a line of code that the computer doesn't read"
-loopQ="a block of code that repeats itself"
+upperQ="this function turns all letters in a string into capital letters: what is the term"
+titleQ="this function capitalizes the first letter of every word: what is the term"
+flowChartQ="used to show how a program flows: what is the term"
+intQ="a whole number data type: what is the term"
+stringQ="a list of characters surrounded by quotations: what is the term"
+indexQ="a specific position in a string what is the term: what is the term"
+functionQ=" a block of code that you can call whenever: what is the term"
+variableQ="a defined value that can be called: what is the term"
+commentQ="a line of code that the computer doesn't read: what is the term"
+loopQ="a block of code that repeats itself: what is the term"
+upper="upper"
+title="title"
+flowchart="flowchart"
+integer="int"
+string="string"
+index="index"
+function="function"
+variable="variable"
+comment="comment"
+loop="loop"
+#ists
+triviaList=[upperQ,titleQ,flowChartQ,intQ,stringQ,indexQ,functionQ,variableQ,commentQ,loopQ]
+wordList=[upper,title,flowchart,integer,string,index,function,variable,comment,loop]
 
 #defining the puzzle
 puzzle1="fqvindexkoclyaxepnffugohriludgvlbwninttxgkrtccaniognretheblttziipmaolpewormporsesnbotpugtzlscwsswjfe"
 #score variable
 score=0
+
+#finds a random question and returns it
+def randomQuestion():
+    for i in triviaList:
+        randNum=random.randrange(len(triviaList))
+        question=triviaList[randNum]
+        answer=wordList[randNum]
+        del triviaList[randNum]
+        del wordList[randNum]
+        askQuestion(question,answer,puzzle1)
+        
 # the trivia part of the game
 def askQuestion(tQuestion,word,puzzle):
     attempts=10
     global score
-    fullQuestion=tQuestion,"what is the term"
+    #fullQuestion=tQuestion,"what is the term"
     while True:
-        answer=input(fullQuestion)
+        answer=input(tQuestion)
         if answer.lower()==word:
             print("correct")
             score+=attempts*5
@@ -34,7 +59,7 @@ def askQuestion(tQuestion,word,puzzle):
 # the puzzle part of the game        
 def puzzleSolve(word,attempts,puzzle):
     global score
-    display="where is",word,"at in the puzzle put a comma between the index's"
+    display="where is "+word+" at in the puzzle put a comma between the index's and at the end"
     while True:
         displaypuzzle(puzzle)
         answer=input(display)
@@ -59,7 +84,7 @@ def puzzleSolve(word,attempts,puzzle):
 
 #displaying  the puzzle
 def displaypuzzle(puzzle):
-    print(" 0123456789")
+    print("  0123456789")
     print("0",puzzle[0:10])
     print("1",puzzle[10:20])
     print("2",puzzle[20:30])
@@ -73,26 +98,6 @@ def displaypuzzle(puzzle):
     print()
     
 def main():
-    askQuestion(upperQ,"upper",puzzle1)
-    print("your Score is ",score)
-    askQuestion(titleQ,"title",puzzle1)
-    print("your Score is ",score)
-    askQuestion(flowChartQ,"flowChart",puzzle1)
-    print("your Score is ",score)
-    askQuestion(intQ,"int",puzzle1)
-    print("your Score is ",score)
-    askQuestion(stringQ,"string",puzzle1)
-    print("your Score is ",score)
-    askQuestion(indexQ,"index",puzzle1)
-    print("your Score is ",score)
-    askQuestion(functionQ,"function",puzzle1)
-    print("your Score is ",score)
-    askQuestion(variableQ,"variable",puzzle1)
-    print("your Score is ",score)
-    askQuestion(commentQ,"comment",puzzle1)
-    print("your Score is ",score)
-    askQuestion(loopQ,"loop",puzzle1)
-    print("your Final Score is ",score)
-    
-    
+    randomQuestion()
+    print("your final score is",score)
 main()
