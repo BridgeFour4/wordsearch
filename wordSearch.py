@@ -25,22 +25,23 @@ loop="loop"
 #ists
 triviaList=[upperQ,titleQ,flowChartQ,intQ,stringQ,indexQ,functionQ,variableQ,commentQ,loopQ]
 wordList=[upper,title,flowchart,integer,string,index,function,variable,comment,loop]
-
 #defining the puzzle
 puzzle1="fqvindexkoclyaxepnffugohriludgvlbwninttxgkrtccaniognretheblttziipmaolpewormporsesnbotpugtzlscwsswjfe"
 #score variable
 score=0
-
 #finds a random question and returns it
 def randomQuestion():
-    for i in triviaList:
+    print("enter quit at anytime to skip the question")
+    x=0
+    while x<=9:
         randNum=random.randrange(len(triviaList))
         question=triviaList[randNum]
         answer=wordList[randNum]
         del triviaList[randNum]
         del wordList[randNum]
         askQuestion(question,answer,puzzle1)
-        
+        print("your score is now",score)
+        x+=1      
 # the trivia part of the game
 def askQuestion(tQuestion,word,puzzle):
     attempts=10
@@ -48,6 +49,8 @@ def askQuestion(tQuestion,word,puzzle):
     #fullQuestion=tQuestion,"what is the term"
     while True:
         answer=input(tQuestion)
+        if answer.lower()=="quit":
+            break
         if answer.lower()==word:
             print("correct")
             score+=attempts*5
@@ -63,12 +66,12 @@ def puzzleSolve(word,attempts,puzzle):
     while True:
         displaypuzzle(puzzle)
         answer=input(display)
+        if answer.lower()=="quit":
+            break
         input_number=""
         new_word=""
-        for i in answer:
-            
+        for i in answer:         
             if i ==",":
-                print(input_number)
                 input_number=int(input_number)
                 new_word+=puzzle[input_number]
                 input_number=""
@@ -81,7 +84,6 @@ def puzzleSolve(word,attempts,puzzle):
         else:
             attempts-=1
             print(attempts,"attempts left")
-
 #displaying  the puzzle
 def displaypuzzle(puzzle):
     print("  0123456789")
@@ -96,8 +98,13 @@ def displaypuzzle(puzzle):
     print("8",puzzle[80:90])
     print("9",puzzle[90:])
     print()
-    
+#main menu
 def main():
     randomQuestion()
     print("your final score is",score)
+    continuey=input("would you like to play again y/n ")
+    if continuey.lower()=="y":
+        main()
+    else:
+        break
 main()
