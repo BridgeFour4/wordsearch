@@ -72,9 +72,12 @@ def puzzleSolve(word,attempts,puzzle):
         new_word=""
         for i in answer:         
             if i ==",":
-                input_number=int(input_number)
-                new_word+=puzzle[input_number]
-                input_number=""
+                if input_number.isdigit():
+                    input_number=int(input_number)
+                    new_word+=puzzle[input_number]
+                    input_number=""
+                else:
+                    break
             else:    
                 input_number+=i  
         if new_word==word:
@@ -100,11 +103,11 @@ def displaypuzzle(puzzle):
     print()
 #main menu
 def main():
+    print("you get 10 attempts per question  after that your score will go into the negatives")
     randomQuestion()
     print("your final score is",score)
     continuey=input("would you like to play again y/n ")
     if continuey.lower()=="y":
         main()
-    else:
-        break
+    
 main()
